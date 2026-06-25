@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buku Penghubung Cinta & Prestasi Tahfidz - RA API Futuhiyyah</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f8fafc;
+        }
+        /* Custom Scrollbar */
+        .scrollbar-none::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-none {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="text-slate-800 pb-24">
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-teal-500 via-emerald-500 to-emerald-600 text-white shadow-lg rounded-b-[2.5rem] pt-8 pb-10 px-6 relative overflow-hidden">
+        <div class="absolute -right-12 -top-12 w-44 h-44 bg-white opacity-10 rounded-full"></div>
+        <div class="absolute -left-12 -bottom-12 w-36 h-36 bg-white opacity-10 rounded-full"></div>
+        
+        <div class="max-w-md mx-auto flex flex-col items-center text-center">
+            <!-- Icon/Logo -->
+            <div class="bg-white p-3 rounded-full shadow-md mb-3 flex items-center justify-center animate-bounce duration-1000">
+                <svg class="w-12 h-12 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+            </div>
+            <h1 class="text-2xl font-extrabold tracking-wide">RA API FUTUHIYYAH</h1>
+            <p class="text-sm text-emerald-100 font-medium mt-1">Buku Penghubung Cinta & Prestasi Tahfidz</p>
+            <div class="mt-4 bg-emerald-600/50 backdrop-blur-sm py-1.5 px-4 rounded-full border border-emerald-400/30 text-xs font-semibold">
+                "Belajar dengan Cinta, Menggapai Ridha Allah Ta’ala"
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-md mx-auto px-4 -mt-6">
+        
+        <!-- Student Info Card -->
+        <div class="bg-white rounded-3xl p-5 shadow-md border border-slate-100 mb-6 relative z-10">
+            <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Identitas Ananda</h2>
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Nama Panggilan</label>
+                    <input type="text" id="studentName" value="Ahmad" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-3 py-2 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">Kelas/Kelompok</label>
+                    <select id="studentClass" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-3 py-2 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all">
+                        <option value="A1 (Ar-Rahman)">A1 (Ar-Rahman)</option>
+                        <option value="A2 (Ar-Rahim)">A2 (Ar-Rahim)</option>
+                        <option value="B1 (Al-Malik)">B1 (Al-Malik)</option>
+                        <option value="B2 (Al-Quddus)">B2 (Al-Quddus)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs: KBC Habits vs Tahfidz Achievement -->
+        <div class="flex bg-slate-200/80 p-1.5 rounded-3xl mb-6">
+            <button id="tabKBC" class="flex-1 py-3 text-center rounded-2xl text-sm font-bold transition-all bg-white text-emerald-700 shadow-sm">
+                 Jurnal Harian Cinta
+            </button>
+            <button id="tabTahfidz" class="flex-1 py-3 text-center rounded-2xl text-sm font-bold text-slate-600 hover:text-slate-800 transition-all">
+                🎯 Tahfidz & Doa
+            </button>
+        </div>
+
+        <!-- SECTION 1: KBC HABITS (JURNAL HARIAN CINTA) -->
+        <div id="sectionKBC">
+            <!-- Day Selector Tabs -->
+            <div class="mb-6">
+                <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Pilih Hari Pemantauan</h2>
+                <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-none" id="dayTabs">
+                    <!-- Days will be generated dynamically by JS -->
+                </div>
+            </div>
+
+            <!-- Indicator Checklist Section -->
+            <div class="space-y-5">
+                <!-- Category: Hubbullah (Cinta Allah) -->
+                <div class="bg-gradient-to-br from-emerald-50/50 to-white rounded-3xl p-5 shadow-sm border border-emerald-100">
+                    <div class="flex items-center gap-2.5 mb-4">
+                        <div class="bg-emerald-500 text-white p-2 rounded-2xl">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-emerald-800 text-sm leading-tight">Hubbullah (Cinta Allah & Rasul)</h3>
+                            <p class="text-xs text-emerald-600 font-medium">Aspek Keimanan & Ketaatan Ibadah</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3" id="listHubbullah"></div>
+                </div>
+
+                <!-- Category: Hubbunafs (Cinta Diri Sendiri) -->
+                <div class="bg-gradient-to-br from-rose-50/50 to-white rounded-3xl p-5 shadow-sm border border-rose-100">
+                    <div class="flex items-center gap-2.5 mb-4">
+                        <div class="bg-rose-400 text-white p-2 rounded-2xl">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-rose-800 text-sm leading-tight">Hubbunafs (Cinta Diri Sendiri)</h3>
+                            <p class="text-xs text-rose-500 font-medium">Kemandirian, Kebersihan & Kesehatan Diri</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3" id="listHubbunafs"></div>
+                </div>
+
+                <!-- Category: Hubbunnaas (Cinta Sesama) -->
+                <div class="bg-gradient-to-br from-amber-50/50 to-white rounded-3xl p-5 shadow-sm border border-amber-100">
+                    <div class="flex items-center gap-2.5 mb-4">
+                        <div class="bg-amber-400 text-white p-2 rounded-2xl">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-amber-800 text-sm leading-tight">Hubbunnaas (Cinta Sesama)</h3>
+                            <p class="text-xs text-amber-600 font-medium">Akhlak Mulia, Sopan Santun & Berbagi</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3" id="listHubbunnaas"></div>
+                </div>
+
+                <!-- Category: Hubbulbiah (Cinta Lingkungan) -->
+                <div class="bg-gradient-to-br from-sky-50/50 to-white rounded-3xl p-5 shadow-sm border border-sky-100">
+                    <div class="flex items-center gap-2.5 mb-4">
+                        <div class="bg-sky-400 text-white p-2 rounded-2xl">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h2.945M11 20.955V18a2 2 0 00-2-2h-.5a2 2 0 01-2-2v-1a2 2 0 00-2-2H2.05M12 21a9 9 0 110-18 9 9 0 010 18z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-sky-800 text-sm leading-tight">Hubbulbiah (Cinta Alam & Semesta)</h3>
+                            <p class="text-xs text-sky-600 font-medium">Kebersihan, Disiplin & Kasih Sayang Fauna-Flora</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3" id="listHubbulbiah"></div>
+                </div>
+            </div>
+
+            <!-- Notes Section -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 mt-6">
+                <h3 class="font-extrabold text-slate-800 text-sm mb-3 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                    </svg>
+                    Pesan Cinta Ayah/Bunda hari ini:
+                </h3>
+                <textarea id="parentNotes" rows="3" placeholder="Ceritakan pencapaian atau perilaku baik istimewa ananda hari ini di rumah kepada Guru..." class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:bg-white transition-all resize-none"></textarea>
+            </div>
+        </div>
+
+        <!-- SECTION 2: TAHFIDZ & PRESTASI (HADITS, SURAT, DOA) -->
+        <div id="sectionTahfidz" class="hidden">
+            <!-- Tahfidz Sub-Tabs -->
+            <div class="flex gap-1.5 overflow-x-auto pb-3 scrollbar-none mb-4">
+                <button id="subTabSurat" class="flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-extrabold bg-emerald-500 text-white shadow-sm">
+                     Surat Pendek
+                </button>
+                <button id="subTabHadits" class="flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-extrabold bg-white text-slate-600 border border-slate-100">
+                    💬 Hadits Pilihan
+                </button>
+                <button id="subTabDoa" class="flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-extrabold bg-white text-slate-600 border border-slate-100">
+                    🤲 Do'a Harian
+                </button>
+            </div>
+
+            <!-- Search / Filter input -->
+            <div class="mb-4 relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                    <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </span>
+                <input type="text" id="tahfidzSearch" placeholder="Cari surat, hadits, atau doa harian..." class="w-full bg-white border border-slate-200 rounded-2xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all">
+            </div>
+
+            <!-- Tahfidz List Container -->
+            <div class="space-y-3" id="tahfidzList">
+                <!-- Lists will be populated dynamically -->
+            </div>
+            
+            <!-- Tahfidz Stats Summary -->
+            <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-3xl p-5 mt-6 shadow-md flex items-center justify-between">
+                <div>
+                    <h4 class="text-sm font-bold opacity-90">Progress Keseluruhan Hafalan</h4>
+                    <p class="text-xs text-emerald-100 mt-1">Status: <span id="tahfidzOverallDesc" class="font-bold">Masya Allah, hebat!</span></p>
+                </div>
+                <div class="text-right">
+                    <span class="text-3xl font-black" id="tahfidzOverallCount">0 / 60</span>
+                    <p class="text-[10px] text-emerald-200 uppercase font-bold tracking-wider">Hafal Lancar (BSB)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROGRESS & STATS (JURNAL HARIAN CINTA) -->
+        <div id="kbcProgressCard" class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 mt-6 flex flex-col items-center justify-center text-center">
+            <div class="relative w-32 h-32 flex items-center justify-center">
+                <!-- SVG Progress Ring -->
+                <svg class="w-full h-full transform -rotate-90">
+                    <circle cx="64" cy="64" r="54" stroke="#f1f5f9" stroke-width="12" fill="transparent" />
+                    <circle cx="64" cy="64" r="54" stroke="#10b981" stroke-width="12" fill="transparent" 
+                        stroke-dasharray="339.29" 
+                        stroke-dashoffset="339.29" 
+                        id="progressRing"
+                        stroke-linecap="round"
+                    />
+                </svg>
+                <div class="absolute flex flex-col items-center justify-center">
+                    <span class="text-3xl font-black text-emerald-500" id="progressPercentage">0%</span>
+                    <span class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Terlaksana</span>
+                </div>
+            </div>
+            <p class="text-sm font-semibold text-slate-500 mt-4 leading-relaxed" id="progressMotivation">
+                Masya Allah, mari lengkapi checklist hari ini ya Bun!
+            </p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="mt-6 space-y-3">
+            <!-- Share to WA -->
+            <button id="btnShareWA" class="w-full bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 text-white font-extrabold py-4 px-6 rounded-3xl shadow-md shadow-emerald-200 flex items-center justify-center gap-2 transform active:scale-95 transition-all">
+                <!-- WA Icon -->
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.42 9.864-9.864.002-2.637-1.03-5.118-2.91-6.993-1.88-1.88-4.36-2.91-7.002-2.912-5.43 0-9.855 4.417-9.86 9.86-.001 1.765.485 3.483 1.407 5.011l-.995 3.637 3.737-.98zm11.367-6.525c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                </svg>
+                Kirim Laporan Terpadu via WA
+            </button>
+
+            <!-- Reset Button -->
+            <button id="btnReset" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-500 font-bold py-3 px-6 rounded-3xl text-sm flex items-center justify-center gap-2 transition-all">
+                Reset Jurnal Hari Ini
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-8 text-center text-xs text-slate-400 font-semibold leading-relaxed">
+            <p>© 2026 RA API Futuhiyyah. All Rights Reserved.</p>
+            <p class="mt-1 text-emerald-600 font-extrabold italic">"Mengasuh dengan Hati, Mendidik dengan Cinta"</p>
+        </div>
+
+    </main>
+
+    <!-- Floating Toast Notification -->
+    <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-slate-900 text-white text-xs font-bold px-6 py-3 rounded-full shadow-xl opacity-0 translate-y-4 pointer-events-none transition-all duration-300 z-50 flex items-center gap-2">
+        <span id="toastMessage">Laporan berhasil diperbarui!</span>
+    </div>
+
+    <!-- JS Implementation -->
+    <script>
+        // Database Jurnal Harian Cinta (KBC)
+        const indicators = {
+            hubbullah: [
+                { id: 'h1', text: 'Mengucapkan dan menjawab salam dengan ramah dan santun.' },
+                { id: 'h2', text: 'Melaksanakan ibadah bersama keluarga (salat berjamaah, mengaji, dll).' },
+                { id: 'h3', text: 'Terbiasa membaca doa harian sebelum/sesudah melakukan aktivitas.' }
+            ],
+            hubbunafs: [
+                { id: 'n1', text: 'Mampu mandi, menggosok gigi, dan berpakaian secara mandiri tanpa dipaksa.' },
+                { id: 'n2', text: 'Merapikan kembali mainan, buku, atau alat belajar ke tempatnya sendiri.' },
+                { id: 'n3', text: 'Makan dan minum sendiri dengan tertib, bersih, serta duduk dengan sopan.' }
+            ],
+            hubbunnaas: [
+                { id: 'ns1', text: 'Menggunakan 3 kata ajaib dengan tulus (Tolong, Maaf, Terima Kasih).' },
+                { id: 'ns2', text: 'Mau berbagi camilan atau mainan dengan saudara atau teman bermain.' },
+                { id: 'ns3', text: 'Menunjukkan empati dan mau membantu pekerjaan ringan di rumah.' }
+            ],
+            hubbulbiah: [
+                { id: 'b1', text: 'Membuang sampah pada tempatnya secara disiplin di rumah.' },
+                { id: 'b2', text: 'Ikut serta merawat tanaman rumah atau menyayangi hewan peliharaan.' },
+                { id: 'b3', text: 'Menjaga kebersihan area pribadi seperti tempat tidur & meja belajar.' }
+            ]
+        };
+
+        // Database Laporan Prestasi Hafalan (Surat Pendek, Hadits, Doa)
+        const tahfidzDb = {
+            surat: [
+                "Al-Fatihah", "An-Naas", "Al-Falaq", "Al-Ikhlas", "Al-Lahab", 
+                "An-Nashr", "Al-Kafirun", "Al-Kautsar", "Al-Ma'un", "Al-Quraisy", 
+                "Al-Fiil", "Al-Humazah", "Al-'Ashr", "At-Takatsur", "Al-Qari'ah", 
+                "Al-'Aadiyat", "Az-Zalzalah", "Al-Bayyinah", "Al-Qodr", "Al-Alaq"
+            ],
+            hadits: [
+                "Hadits Menyebarkan Salam", "Hadits Kasih Sayang", "Hadits Kemuliaan Ibu", 
+                "Hadits Larangan Marah", "Hadits Adab Makan", "Hadits Adab Minum", 
+                "Hadits Kebersihan", "Hadits Ketaatan", "Hadits Mendirikan Sholat", 
+                "Hadits Berbuat Baik", "Hadits Menjaga Lisan", "Hadits Belajar Al-Qur'an", 
+                "Hadits Beramal/Sedekah", "Hadits Tersenyum", "Hadits Malu", 
+                "Hadits Larangan Bersedih", "Hadits Muslim Bersaudara", "Hadits Menutup Aurat", 
+                "Hadits Bersabar", "Hadits Ridho Orang Tua"
+            ],
+            doa: [
+                "Do'a Belajar", "Do'a Makan", "Do'a Sebelum & Sesudah Kegiatan", 
+                "Do'a Sebelum & Sesudah Tidur", "Do'a Kedua Orang Tua", "Do'a Dunia Akhirat", 
+                "Do'a Masuk & Keluar Kamar Mandi", "Do'a Masuk & Keluar Rumah", 
+                "Do'a Naik Kendaraan", "Do'a Masuk & Keluar Masjid", "Do'a Wudhu", 
+                "Do'a Bercermin", "Do'a Berpakaian", "Do'a Menjenguk Orang Sakit", 
+                "Do'a Niat Puasa Ramadhan", "Do'a Berbuka Puasa", "Do'a Ketika Turun Hujan", 
+                "Do'a Melepas Pakaian", "Do'a Ketika Ada Petir", "Do'a Penutup Majelis"
+            ]
+        };
+
+        const days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+        
+        // App State
+        let state = {
+            currentDay: 'Senin',
+            currentSection: 'kbc', // 'kbc' or 'tahfidz'
+            currentSubTab: 'surat', // 'surat', 'hadits', 'doa'
+            studentName: 'Ahmad',
+            studentClass: 'A1 (Ar-Rahman)',
+            checks: {}, // KBC checks
+            tahfidz: {}, // Tahfidz level: { item_name: 'BB'/'MB'/'BSH'/'BSB' }
+            notes: {},
+            searchQuery: ""
+        };
+
+        // Initialize App
+        function initApp() {
+            const savedState = localStorage.getItem('ra_futuhiyyah_kbc_terpadu_state');
+            if (savedState) {
+                state = JSON.parse(savedState);
+                document.getElementById('studentName').value = state.studentName || 'Ahmad';
+                document.getElementById('studentClass').value = state.studentClass || 'A1 (Ar-Rahman)';
+            } else {
+                // Pre-fill empty structure
+                days.forEach(day => {
+                    state.checks[day] = {};
+                    state.notes[day] = "";
+                });
+                // Default tahfidz states
+                tahfidzDb.surat.forEach(s => state.tahfidz[s] = 'BB');
+                tahfidzDb.hadits.forEach(h => state.tahfidz[h] = 'BB');
+                tahfidzDb.doa.forEach(d => state.tahfidz[d] = 'BB');
+            }
+
+            // Fallback for subtabs
+            if (!state.currentSubTab) state.currentSubTab = 'surat';
+            if (!state.currentSection) state.currentSection = 'kbc';
+
+            setupEventListeners();
+            renderDayTabs();
+            renderChecklists();
+            renderTahfidzList();
+            updateProgress();
+            updateTahfidzOverallStats();
+            switchSection(state.currentSection);
+        }
+
+        function saveToStorage() {
+            state.studentName = document.getElementById('studentName').value;
+            state.studentClass = document.getElementById('studentClass').value;
+            localStorage.setItem('ra_futuhiyyah_kbc_terpadu_state', JSON.stringify(state));
+        }
+
+        // Toggle Sections (KBC Habits vs Tahfidz)
+        function switchSection(sect) {
+            state.currentSection = sect;
+            saveToStorage();
+            
+            const tabKBC = document.getElementById('tabKBC');
+            const tabTahfidz = document.getElementById('tabTahfidz');
+            const sectionKBC = document.getElementById('sectionKBC');
+            const sectionTahfidz = document.getElementById('sectionTahfidz');
+            const kbcProgressCard = document.getElementById('kbcProgressCard');
+
+            if (sect === 'kbc') {
+                tabKBC.className = "flex-1 py-3 text-center rounded-2xl text-sm font-bold transition-all bg-white text-emerald-700 shadow-sm";
+                tabTahfidz.className = "flex-1 py-3 text-center rounded-2xl text-sm font-bold text-slate-600 hover:text-slate-800 transition-all";
+                sectionKBC.classList.remove('hidden');
+                sectionTahfidz.classList.add('hidden');
+                kbcProgressCard.classList.remove('hidden');
+            } else {
+                tabTahfidz.className = "flex-1 py-3 text-center rounded-2xl text-sm font-bold transition-all bg-white text-emerald-700 shadow-sm";
+                tabKBC.className = "flex-1 py-3 text-center rounded-2xl text-sm font-bold text-slate-600 hover:text-slate-800 transition-all";
+                sectionTahfidz.classList.remove('hidden');
+                sectionKBC.classList.add('hidden');
+                kbcProgressCard.classList.add('hidden');
+            }
+        }
+
+        // Toggle Tahfidz Sub-Tabs (Surat vs Hadits vs Doa)
+        function switchTahfidzSubTab(sub) {
+            state.currentSubTab = sub;
+            saveToStorage();
+
+            const btns = {
+                surat: document.getElementById('subTabSurat'),
+                hadits: document.getElementById('subTabHadits'),
+                doa: document.getElementById('subTabDoa')
+            };
+
+            Object.keys(btns).forEach(key => {
+                if (key === sub) {
+                    btns[key].className = "flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-extrabold bg-emerald-500 text-white shadow-sm transition-all";
+                } else {
+                    btns[key].className = "flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-extrabold bg-white text-slate-600 border border-slate-100 transition-all";
+                }
+            });
+
+            renderTahfidzList();
+        }
+
+        // Setup DOM Listeners
+        function setupEventListeners() {
+            document.getElementById('tabKBC').addEventListener('click', () => switchSection('kbc'));
+            document.getElementById('tabTahfidz').addEventListener('click', () => switchSection('tahfidz'));
+
+            document.getElementById('subTabSurat').addEventListener('click', () => switchTahfidzSubTab('surat'));
+            document.getElementById('subTabHadits').addEventListener('click', () => switchTahfidzSubTab('hadits'));
+            document.getElementById('subTabDoa').addEventListener('click', () => switchTahfidzSubTab('doa'));
+
+            document.getElementById('studentName').addEventListener('input', () => {
+                saveToStorage();
+                renderDayTabs();
+            });
+            document.getElementById('studentClass').addEventListener('change', saveToStorage);
+            
+            document.getElementById('parentNotes').addEventListener('input', () => {
+                state.notes[state.currentDay] = document.getElementById('parentNotes').value;
+                saveToStorage();
+            });
+
+            document.getElementById('tahfidzSearch').addEventListener('input', (e) => {
+                state.searchQuery = e.target.value.toLowerCase();
+                renderTahfidzList();
+            });
+
+            // WA Share
+            document.getElementById('btnShareWA').addEventListener('click', () => {
+                state.notes[state.currentDay] = document.getElementById('parentNotes').value;
+                saveToStorage();
+                sendWhatsAppReport();
+            });
+
+            // Reset
+            document.getElementById('btnReset').addEventListener('click', () => {
+                if (confirm(`Apakah Bunda yakin ingin me-reset isi checklist Hari ${state.currentDay}?`)) {
+                    state.checks[state.currentDay] = {};
+                    state.notes[state.currentDay] = "";
+                    document.getElementById('parentNotes').value = "";
+                    saveToStorage();
+                    renderDayTabs();
+                    renderChecklists();
+                    updateProgress();
+                    showToast(`Data hari ${state.currentDay} di-reset!`);
+                }
+            });
+        }
+
+        // Render Day Tabs
+        function renderDayTabs() {
+            const container = document.getElementById('dayTabs');
+            container.innerHTML = '';
+            
+            days.forEach(day => {
+                const isActive = state.currentDay === day;
+                const totalChecked = Object.values(state.checks[day] || {}).filter(Boolean).length;
+                const totalCount = Object.values(indicators).flat().length;
+
+                const tab = document.createElement('button');
+                tab.className = `flex-shrink-0 px-5 py-2.5 rounded-2xl font-bold text-sm transition-all flex flex-col items-center gap-0.5 ${
+                    isActive 
+                        ? 'bg-emerald-500 text-white shadow-md shadow-emerald-100 scale-105' 
+                        : 'bg-white text-slate-500 border border-slate-100'
+                }`;
+                
+                tab.innerHTML = `
+                    <span>${day}</span>
+                    <span class="text-[10px] ${isActive ? 'text-emerald-100' : 'text-slate-400'}">
+                        ${totalChecked}/${totalCount} Selesai
+                    </span>
+                `;
+                
+                tab.addEventListener('click', () => {
+                    state.notes[state.currentDay] = document.getElementById('parentNotes').value;
+                    saveToStorage();
+                    
+                    state.currentDay = day;
+                    renderDayTabs();
+                    renderChecklists();
+                    document.getElementById('parentNotes').value = state.notes[day] || "";
+                    updateProgress();
+                });
+                
+                container.appendChild(tab);
+            });
+        }
+
+        // Render KBC Checklists
+        function renderChecklists() {
+            const categories = ['hubbullah', 'hubbunafs', 'hubbunnaas', 'hubbulbiah'];
+            
+            categories.forEach(cat => {
+                const containerId = 'list' + cat.charAt(0).toUpperCase() + cat.slice(1);
+                const container = document.getElementById(containerId);
+                container.innerHTML = '';
+                
+                indicators[cat].forEach(ind => {
+                    const isChecked = state.checks[state.currentDay]?.[ind.id] || false;
+                    
+                    const div = document.createElement('div');
+                    div.className = "flex items-start gap-3 p-3 bg-white/70 backdrop-blur-sm rounded-2xl border border-slate-100/50 hover:border-emerald-200 transition-all cursor-pointer";
+                    
+                    div.innerHTML = `
+                        <input type="checkbox" id="${ind.id}" ${isChecked ? 'checked' : ''} class="w-5 h-5 mt-0.5 rounded-lg text-emerald-500 focus:ring-emerald-400 border-slate-300 transition-all cursor-pointer accent-emerald-500">
+                        <label for="${ind.id}" class="text-xs font-bold text-slate-700 leading-relaxed select-none cursor-pointer flex-1">
+                            ${ind.text}
+                        </label>
+                    `;
+                    
+                    const checkbox = div.querySelector('input');
+                    const toggleHandler = () => {
+                        const newStatus = !checkbox.checked;
+                        checkbox.checked = newStatus;
+                        
+                        if (!state.checks[state.currentDay]) {
+                            state.checks[state.currentDay] = {};
+                        }
+                        state.checks[state.currentDay][ind.id] = newStatus;
+                        saveToStorage();
+                        updateProgress();
+                        renderDayTabs();
+                    };
+
+                    checkbox.addEventListener('change', (e) => {
+                        e.stopPropagation();
+                        if (!state.checks[state.currentDay]) {
+                            state.checks[state.currentDay] = {};
+                        }
+                        state.checks[state.currentDay][ind.id] = checkbox.checked;
+                        saveToStorage();
+                        updateProgress();
+                        renderDayTabs();
+                    });
+
+                    div.addEventListener('click', toggleHandler);
+                    container.appendChild(div);
+                });
+            });
+        }
+
+        // Render Tahfidz & Prestasi List
+        function renderTahfidzList() {
+            const container = document.getElementById('tahfidzList');
+            container.innerHTML = '';
+
+            const listItems = tahfidzDb[state.currentSubTab];
+            const filteredItems = listItems.filter(item => item.toLowerCase().includes(state.searchQuery));
+
+            if (filteredItems.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 text-slate-400 text-sm font-semibold">
+                         Data tidak ditemukan...
+                    </div>
+                `;
+                return;
+            }
+
+            filteredItems.forEach(item => {
+                const currentStatus = state.tahfidz[item] || 'BB';
+                
+                const div = document.createElement('div');
+                div.className = "bg-white p-4 rounded-3xl border border-slate-100 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3";
+                
+                // Set badge colors
+                let badgeClass = "bg-slate-100 text-slate-500";
+                let badgeText = "Belum Dihafal (BB)";
+                
+                if (currentStatus === 'MB') {
+                    badgeClass = "bg-amber-100 text-amber-700";
+                    badgeText = "Mulai Berkembang (MB)";
+                } else if (currentStatus === 'BSH') {
+                    badgeClass = "bg-sky-100 text-sky-700";
+                    badgeText = "Sesuai Harapan (BSH)";
+                } else if (currentStatus === 'BSB') {
+                    badgeClass = "bg-emerald-100 text-emerald-700";
+                    badgeText = "Sangat Baik/Lancar (BSB)";
+                }
+
+                div.innerHTML = `
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-sm">${item}</h4>
+                        <span class="inline-block mt-1.5 px-2.5 py-1 rounded-full text-[10px] font-extrabold ${badgeClass}">
+                            ${badgeText}
+                        </span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button data-status="BB" class="status-btn w-8 h-8 rounded-xl font-extrabold text-[10px] flex items-center justify-center border ${currentStatus === 'BB' ? 'bg-slate-800 text-white border-slate-800 shadow-sm' : 'bg-slate-50 text-slate-500 border-slate-200'}">BB</button>
+                        <button data-status="MB" class="status-btn w-8 h-8 rounded-xl font-extrabold text-[10px] flex items-center justify-center border ${currentStatus === 'MB' ? 'bg-amber-500 text-white border-amber-500 shadow-sm' : 'bg-slate-50 text-slate-500 border-slate-200'}">MB</button>
+                        <button data-status="BSH" class="status-btn w-8 h-8 rounded-xl font-extrabold text-[10px] flex items-center justify-center border ${currentStatus === 'BSH' ? 'bg-sky-500 text-white border-sky-500 shadow-sm' : 'bg-slate-50 text-slate-500 border-slate-200'}">BSH</button>
+                        <button data-status="BSB" class="status-btn w-8 h-8 rounded-xl font-extrabold text-[10px] flex items-center justify-center border ${currentStatus === 'BSB' ? 'bg-emerald-500 text-white border-emerald-500 shadow-sm' : 'bg-slate-50 text-slate-500 border-slate-200'}">BSB</button>
+                    </div>
+                `;
+
+                // Add button click listener
+                const buttons = div.querySelectorAll('.status-btn');
+                buttons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const newStatus = btn.getAttribute('data-status');
+                        state.tahfidz[item] = newStatus;
+                        saveToStorage();
+                        renderTahfidzList();
+                        updateTahfidzOverallStats();
+                        showToast(`Perubahan hafalan '${item}' disimpan!`);
+                    });
+                });
+
+                container.appendChild(div);
+            });
+        }
+
+        // Update Circular KBC Progress Bar
+        function updateProgress() {
+            const total = Object.values(indicators).flat().length;
+            const checked = Object.values(state.checks[state.currentDay] || {}).filter(Boolean).length;
+            const percentage = total > 0 ? Math.round((checked / total) * 100) : 0;
+            
+            const circle = document.getElementById('progressRing');
+            const circumference = 2 * Math.PI * 54; // r=54
+            const offset = circumference - (percentage / 100) * circumference;
+            circle.style.strokeDashoffset = offset;
+            
+            document.getElementById('progressPercentage').innerText = percentage + '%';
+            
+            const motivText = document.getElementById('progressMotivation');
+            if (percentage === 0) {
+                motivText.innerHTML = "Masya Allah, mari lengkapi checklist hari ini ya Bun! ✨";
+            } else if (percentage < 50) {
+                motivText.innerHTML = "Luar biasa! Sedikit demi sedikit mengalirkan cinta untuk ananda. 🌱";
+            } else if (percentage < 100) {
+                motivText.innerHTML = "Hebat sekali! Bunda hebat, ananda bahagia. Tinggal sedikit lagi! ❤️";
+            } else {
+                motivText.innerHTML = "Alhamdulillah! Sempurna, ananda mengamalkan Kurikulum Cinta hari ini! 🌟";
+            }
+        }
+
+        // Calculate Overall Tahfidz Progress
+        function updateTahfidzOverallStats() {
+            const items = Object.keys(state.tahfidz);
+            const total = items.length;
+            const lancarCount = Object.values(state.tahfidz).filter(v => v === 'BSB').length;
+            const bshCount = Object.values(state.tahfidz).filter(v => v === 'BSH').length;
+            const totalActive = lancarCount + bshCount;
+
+            document.getElementById('tahfidzOverallCount').innerText = `${lancarCount} / ${total}`;
+            
+            const desc = document.getElementById('tahfidzOverallDesc');
+            if (lancarCount === 0) {
+                desc.innerText = "Mari mulai bimbingan cinta di rumah!";
+            } else if (lancarCount < 10) {
+                desc.innerText = "Subhanallah, awal yang baik!";
+            } else if (lancarCount < 30) {
+                desc.innerText = "Alhamdulillah, ananda makin lancar!";
+            } else {
+                desc.innerText = "Allahu Akbar, luar biasa prestasinya!";
+            }
+        }
+
+        // Show Toast Notifications
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').innerText = message;
+            toast.className = toast.className.replace('opacity-0 translate-y-4 pointer-events-none', 'opacity-100 translate-y-0');
+            
+            setTimeout(() => {
+                toast.className = toast.className.replace('opacity-100 translate-y-0', 'opacity-0 translate-y-4 pointer-events-none');
+            }, 2500);
+        }
+
+        // WhatsApp Integrated Reporter
+        function sendWhatsAppReport() {
+            const name = document.getElementById('studentName').value;
+            const className = document.getElementById('studentClass').value;
+            const parentNote = document.getElementById('parentNotes').value;
+            const currentDayChecks = state.checks[state.currentDay] || {};
+
+            let msg = `*LAPORAN TERPADU HARIAN CINTA & TAHFIDZ*\n*RA API FUTUHIYYAH SRAGEN*\n\n`;
+            msg += `👤 *Nama Ananda:* ${name}\n`;
+            msg += `🏫 *Kelas/Kelompok:* ${className}\n`;
+            msg += `📅 *Hari Pemantauan:* ${state.currentDay}\n`;
+            msg += `━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+            msg += `*1. JURNAL HARIAN CINTA (KBC)*\n`;
+            
+            // Hubbullah
+            msg += `🕋 *Hubbullah (Cinta Allah):*\n`;
+            indicators.hubbullah.forEach(ind => {
+                const icon = currentDayChecks[ind.id] ? '✅' : '❌';
+                msg += ` ${icon} ${ind.text}\n`;
+            });
+            msg += `\n`;
+
+            // Hubbunafs
+            msg += `💖 *Hubbunafs (Cinta Diri):*\n`;
+            indicators.hubbunafs.forEach(ind => {
+                const icon = currentDayChecks[ind.id] ? '✅' : '❌';
+                msg += ` ${icon} ${ind.text}\n`;
+            });
+            msg += `\n`;
+
+            // Hubbunnaas
+            msg += `🤝 *Hubbunnaas (Cinta Sesama):*\n`;
+            indicators.hubbunnaas.forEach(ind => {
+                const icon = currentDayChecks[ind.id] ? '✅' : '❌';
+                msg += ` ${icon} ${ind.text}\n`;
+            });
+            msg += `\n`;
+
+            // Hubbulbiah
+            msg += `🌱 *Hubbulbiah (Cinta Semesta):*\n`;
+            indicators.hubbulbiah.forEach(ind => {
+                const icon = currentDayChecks[ind.id] ? '✅' : '❌';
+                msg += ` ${icon} ${ind.text}\n`;
+            });
+            msg += `━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+            // Tahfidz & Prestasi Updates
+            msg += `*2. LAPORAN PROGRESS TAHFIDZ & DOA*\n`;
+            
+            // Get Active/Lancar/MB items
+            const activeSurat = tahfidzDb.surat.filter(s => state.tahfidz[s] && state.tahfidz[s] !== 'BB');
+            const activeHadits = tahfidzDb.hadits.filter(h => state.tahfidz[h] && state.tahfidz[h] !== 'BB');
+            const activeDoa = tahfidzDb.doa.filter(d => state.tahfidz[d] && state.tahfidz[d] !== 'BB');
+
+            if (activeSurat.length > 0) {
+                msg += `📖 *Surat Pendek Terlapor:*\n`;
+                activeSurat.forEach(s => {
+                    const status = state.tahfidz[s];
+                    const statusIcon = status === 'BSB' ? '🌟 Lancar' : (status === 'BSH' ? '👍 Berkembang' : '🌱 Baru Mulai');
+                    msg += ` - ${s} (${statusIcon})\n`;
+                });
+                msg += `\n`;
+            }
+
+            if (activeHadits.length > 0) {
+                msg += `💬 *Hadits Pilihan Terlapor:*\n`;
+                activeHadits.forEach(h => {
+                    const status = state.tahfidz[h];
+                    const statusIcon = status === 'BSB' ? '🌟 Lancar' : (status === 'BSH' ? '👍 Berkembang' : '🌱 Baru Mulai');
+                    msg += ` - ${h} (${statusIcon})\n`;
+                });
+                msg += `\n`;
+            }
+
+            if (activeDoa.length > 0) {
+                msg += `🤲 *Do'a Harian Terlapor:*\n`;
+                activeDoa.forEach(d => {
+                    const status = state.tahfidz[d];
+                    const statusIcon = status === 'BSB' ? '🌟 Lancar' : (status === 'BSH' ? '👍 Berkembang' : '🌱 Baru Mulai');
+                    msg += ` - ${d} (${statusIcon})\n`;
+                });
+                msg += `\n`;
+            }
+
+            if (activeSurat.length === 0 && activeHadits.length === 0 && activeDoa.length === 0) {
+                msg += `_Belum ada hafalan baru yang ditandai hari ini._\n\n`;
+            }
+
+            msg += `━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+            if (parentNote.trim() !== "") {
+                msg += `📝 *Pesan Cinta Orang Tua di Rumah:*\n_"${parentNote}"_\n\n`;
+            }
+
+            msg += `*"Belajar dengan Cinta, Menggapai Ridha Allah Ta'ala"*`;
+            
+            const encodedText = encodeURIComponent(msg);
+            const waUrl = `https://api.whatsapp.com/send?text=${encodedText}`;
+            
+            // Try to redirect
+            window.open(waUrl, '_blank');
+
+            // Copy fallback
+            setTimeout(() => {
+                copyTextFallback(msg);
+            }, 500);
+        }
+
+        // Clipboard Copy Helper
+        function copyTextFallback(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast("Laporan terpadu disalin! Silakan tempel di WA Guru.");
+            } catch (err) {
+                showToast("Gagal menyalin teks.");
+            }
+            document.body.removeChild(textArea);
+        }
+
+        // Run On Start
+        window.onload = initApp;
+    </script>
+</body>
+</html>
